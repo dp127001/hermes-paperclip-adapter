@@ -45,6 +45,31 @@ npm install hermes-paperclip-adapter
 - Python 3.10+
 - At least one LLM API key (Anthropic, OpenRouter, or OpenAI)
 
+## Local Fork Maintenance
+
+If you want to test this repo from a consuming Paperclip install without publishing a package, use a local file dependency in the consumer rather than patching npm cache contents.
+
+Example consumer dependency:
+
+```json
+{
+  "dependencies": {
+    "hermes-paperclip-adapter": "file:src/hermes-paperclip-adapter"
+  }
+}
+```
+
+Recommended workflow:
+
+1. Edit and test in this repo:
+   - `cd /home/doug/src/hermes-paperclip-adapter && npm test`
+2. In the consuming install, refresh dependencies when needed:
+   - `cd /home/doug && npm install`
+3. Verify the consumer resolves to this checkout:
+   - `cd /home/doug && npm ls hermes-paperclip-adapter --depth=0`
+
+This keeps fixes auditable and easy to upstream.
+
 ## Quick Start
 
 ### 1. Register the adapter in your Paperclip server
